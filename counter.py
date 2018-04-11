@@ -1,4 +1,5 @@
 import string
+from copy import *
 
 class cardSet:
     def __init__(self):
@@ -12,10 +13,15 @@ class cardSet:
             self.card[item]=4
         self.card['jo1']=1
         self.card['jo0']=1
+        self.laizi=None
     def cancel(self):
+        if len(self.commandlist)==0:
+            return
         self.reset()
-        self.commandlist=self.commandlist[:-1]
-        for item in self.commandlist:
+        copylist=deepcopy(self.commandlist[:-1])
+        self.commandlist=[]
+        for item in copylist:
+            print(item)
             self.run(item)
     def dec(self,cd):
         self.card[cd]-=1
@@ -43,6 +49,7 @@ class cardSet:
         # &x mean x是癞子
         # +x means 前一手牌用癞子当x
         self.commandlist.append(command)
+        print(self.commandlist)
         if command[0]=='l':
             left=command[1:]
             if left[0]=='.':

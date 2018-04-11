@@ -16,6 +16,7 @@ class GUI:
         self.cmd=StringVar()
         Entry(self.root,textvariable=self.cmd).grid(row=2,columnspan=15)
         self.root.bind("<Return>",self.enterPress)
+        self.root.bind("<Control-z>",self.cancel)
         self.root.mainloop()
     def enterPress(self,e):
         if self.card.run(self.cmd.get())=='set':
@@ -23,6 +24,10 @@ class GUI:
                 if self.card.kind[i]==self.card.laizi:
                     Label(self.root,text=self.card.kind[i],width=5,bg='gray').grid(row=0,column=i)
         self.cmd.set('')
+        self.refreshNum()
+    def cancel(self,e):
+        print("cancel")
+        self.card.cancel()
         self.refreshNum()
     def refreshNum(self):
         for i in range(len(self.card.kind)):
