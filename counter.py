@@ -5,6 +5,7 @@ class cardSet:
         self.kind=['jo1','jo0','2','a','k','q','j','10','9','8','7','6','5','4','3']
         self.card={}
         self.commandlist=[]
+        self.laizi=None
         self.reset()
     def reset(self):
         for item in self.kind:
@@ -39,6 +40,7 @@ class cardSet:
         # xxxyy means xxxyy
         # b.x means xxxx
         # f.x-y.a b c d e f g means xxx-yyy&abcdefg
+        # &x mean x是癞子
         # +x means 前一手牌用癞子当x
         self.commandlist.append(command)
         if command[0]=='l':
@@ -95,8 +97,14 @@ class cardSet:
                 if item==left[0]:
                     self.prt()
                     return
+        if command[0]=='&':
+            left=command[1:]
+            self.laizi=left
+            return 'set'
         if command[0]=='+':
             left=command[1:]
+            self.card[left]+=1
+            self.card[self.laizi]-=1
             self.prt()
             return
         left=self.parse(command)
@@ -104,6 +112,7 @@ class cardSet:
             self.dec(item)
         self.prt()
     def prt(self):
+        return
         line1=[]
         line2=[]
         for item in self.kind:
