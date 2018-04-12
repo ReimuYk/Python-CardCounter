@@ -35,6 +35,75 @@ class cardSet:
                     left=left[len(item):]
                     continue
         return res
+    def scaner(self,command):
+        if command[0]=='l':
+            left=command[1:]
+            if left[0]=='.':
+                left=left[1:]
+            left=left.split('-')
+            flag=False
+            res=''
+            for item in self.kind:
+                if item==left[1]:
+                    flag=True
+                if flag:
+                    res=res+item
+                    res=res+item
+                if item==left[0]:
+                    self.prt()
+                    return res
+        if command[0]=='s':
+            left=command[1:]
+            if left[0]=='.':
+                left=left[1:]
+            left=left.split('-')
+            flag=False
+            res=''
+            for item in self.kind:
+                if item==left[1]:
+                    flag=True
+                if flag:
+                    res=res+item
+                if item==left[0]:
+                    return res
+        if command[0]=='b':
+            left=command[1:]
+            if left[0]=='.':
+                left=left[1:]
+            res=''
+            for i in range(4):
+                res=res+left
+            self.prt()
+            return res
+        if command[0]=='f':
+            res=''
+            left=command[1:]
+            if left[0]=='.':
+                left=left[1:]
+            left=left.split('.')
+            for item in left[1].split():
+                res=res+item
+            flag=False
+            left=left[0].split('-')
+            for item in self.kind:
+                if item==left[1]:
+                    flag=True
+                if flag:
+                    for i in range(3):
+                        res=item+res
+                if item==left[0]:
+                    self.prt()
+                    return res
+        if command[0]=='&':
+            left=command[1:]
+            self.laizi=left
+            return 'laizi '+left
+        if command[0]=='+':
+            left=command[1:]
+            self.card[left]+=1
+            self.card[self.laizi]-=1
+            self.prt()
+            return '+'+left
     def run(self,command):
         ## x,y stand card, 0 stands 10
         # l.x-y means xx-yy连对
