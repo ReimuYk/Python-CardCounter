@@ -104,6 +104,7 @@ class cardSet:
             self.card[self.laizi]-=1
             self.prt()
             return '+'+left
+        return command
     def run(self,command):
         ## x,y stand card, 0 stands 10
         # l.x-y means xx-yy连对
